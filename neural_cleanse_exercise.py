@@ -1,4 +1,5 @@
 """
+ML8502 @MBZUAI
 Neural Cleanse Exercise - Backdoor Forensics
 =============================================
 
@@ -255,21 +256,7 @@ def neural_cleanse(
             # ============================================================
             # TODO: Implement the Neural Cleanse optimization
             # ============================================================
-            # Step 1: Apply trigger to images using apply_trigger(images, trigger, mask)
-            # Step 2: Get model predictions using model(patched_images)
-            # Step 3: Create target labels (all should be suspected_label)
-            #         Hint: torch.full((batch_size,), suspected_label, dtype=torch.long, device=device)
-            # Step 4: Compute cross-entropy loss using F.cross_entropy(logits, target)
-            # Step 5: Compute L1 regularization: lambda_l1 * mask.abs().mean()
-            # Step 6: Combine losses: loss_ce + loss_reg
-
-            loss = None  # REPLACE THIS LINE with the combined loss
-
-            # ============================================================
-            # End of TODO
-            # ============================================================
-
-            total_loss = total_loss + loss  # accumulate across batches
+            raise NotImplementedError("neural cleanse needs to be implemented")
 
         # Backpropagate and update parameters (PROVIDED)
         total_loss.backward()
@@ -354,11 +341,10 @@ def visualize_results(results: dict, class_names: dict, top_n: int = 10):
 
 # Mapping of class indices to names (subset of ImageNet classes)
 CLASS_NAMES = {
-    0: "tench", 1: "goldfish", 2: "great_white_shark", 3: "tiger_shark",
-    4: "hammerhead", 5: "electric_ray", 6: "stingray", 7: "cock",
-    8: "hen", 9: "ostrich", 10: "brambling", 11: "goldfinch",
-    12: "house_finch", 13: "junco", 14: "indigo_bunting", 15: "robin",
-    16: "bulbul", 17: "jay", 18: "magpie", 19: "chickadee"
+    2: "great_white_shark",
+    17: "jay",
+    42: "tree_frog",
+    52: "green_snake"
 }
 
 
@@ -374,10 +360,10 @@ def main():
         data_loader = load_data(batch_size=16)
 
         # Classes to investigate
-        suspected_classes = list(range(20))  # First 20 ImageNet classes
+        suspected_classes = [k for k,v in CLASS_NAMES.items()]  # First 20 ImageNet classes
 
         print(f"\n🔍 Investigating {len(suspected_classes)} classes...")
-        print(f"⚙️  Running Neural Cleanse with 250 optimization steps per class")
+        print(f"⚙️  Running Neural Cleanse with 100 optimization steps per class")
         print(f"⏱️  This will take a few minutes...\n")
 
         results = {}
@@ -390,7 +376,7 @@ def main():
             trigger, mask, history = neural_cleanse(
                 model, data_loader,
                 suspected_label=idx,
-                steps=250,
+                steps=100,
                 lr=0.1,
                 lambda_l1=0.0001,
                 device=DEVICE,
