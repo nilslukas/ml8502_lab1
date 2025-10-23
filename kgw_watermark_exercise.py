@@ -233,7 +233,7 @@ def main():
         wm_green_rate, wm_z_score = detect_watermark(
             watermarked_tokens, vocab_size, SECRET_KEY, gamma
         )
-        print(f"\n📊 Detection results:")
+        print("\n📊 Detection results:")
         print(f"   Green rate: {wm_green_rate:.3f} (expected: {gamma:.3f})")
         print(f"   Z-score: {wm_z_score:.2f}")
 
@@ -257,7 +257,7 @@ def main():
         unwm_green_rate, unwm_z_score = detect_watermark(
             unwatermarked_tokens, vocab_size, SECRET_KEY, gamma
         )
-        print(f"\n📊 Detection results:")
+        print("\n📊 Detection results:")
         print(f"   Green rate: {unwm_green_rate:.3f} (expected: {gamma:.3f})")
         print(f"   Z-score: {unwm_z_score:.2f}")
 

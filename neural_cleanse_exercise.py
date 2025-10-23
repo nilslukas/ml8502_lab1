@@ -103,7 +103,7 @@ def load_backdoored_model(checkpoint_path: str = 'backdoored_resnet50.pth'):
     model.to(DEVICE)
     model.eval()
 
-    print(f"✓ Model loaded successfully")
+    print("✓ Model loaded successfully")
     return model
 
 
@@ -331,7 +331,7 @@ def visualize_results(results: dict, class_names: dict, top_n: int = 10):
 
     plt.tight_layout()
     plt.savefig('neural_cleanse_trigger.png', dpi=200, bbox_inches='tight')
-    print(f"\n✓ Trigger visualization saved to neural_cleanse_trigger.png")
+    print("\n✓ Trigger visualization saved to neural_cleanse_trigger.png")
     plt.show()
 
     return most_suspicious
@@ -365,8 +365,8 @@ def main():
         suspected_classes = [k for k,v in CLASS_NAMES.items()]  # First 20 ImageNet classes
 
         print(f"\n🔍 Investigating {len(suspected_classes)} classes...")
-        print(f"⚙️  Running Neural Cleanse with 100 optimization steps per class")
-        print(f"⏱️  This will take a few minutes...\n")
+        print("⚙️  Running Neural Cleanse with 100 optimization steps per class")
+        print("⏱️  This will take a few minutes...\n")
 
         results = {}
 
