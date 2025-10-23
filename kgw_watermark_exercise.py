@@ -9,7 +9,7 @@ The watermark uses a pseudorandom function (PRF) to partition the vocabulary int
 receive a logit boost, making them more likely. Detection measures the green token rate and
 computes a z-score to determine if text is watermarked.
 
-Your task: Fill in the three TODO sections to complete the implementation.
+Your task: Fill in the two TODO sections to complete the implementation.
 Run the script to verify your solution passes all unit tests.
 """
 
