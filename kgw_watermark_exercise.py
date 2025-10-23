@@ -20,7 +20,9 @@ import numpy as np
 from typing import Tuple
 
 # Device configuration
-DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+DEVICE = torch.device(
+    "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
+)
 SECRET_KEY = 'ml8502-2025'
 
 
