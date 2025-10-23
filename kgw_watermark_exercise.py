@@ -9,7 +9,7 @@ The watermark uses a pseudorandom function (PRF) to partition the vocabulary int
 receive a logit boost, making them more likely. Detection measures the green token rate and
 computes a z-score to determine if text is watermarked.
 
-Your task: Fill in the three TODO sections to complete the implementation.
+Your task: Fill in the two TODO sections to complete the implementation.
 Run the script to verify your solution passes all unit tests.
 """
 
@@ -20,7 +20,9 @@ import numpy as np
 from typing import Tuple
 
 # Device configuration
-DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+DEVICE = torch.device(
+    "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
+)
 SECRET_KEY = 'ml8502-2025'
 
 
@@ -231,7 +233,7 @@ def main():
         wm_green_rate, wm_z_score = detect_watermark(
             watermarked_tokens, vocab_size, SECRET_KEY, gamma
         )
-        print(f"\n📊 Detection results:")
+        print("\n📊 Detection results:")
         print(f"   Green rate: {wm_green_rate:.3f} (expected: {gamma:.3f})")
         print(f"   Z-score: {wm_z_score:.2f}")
 
@@ -255,7 +257,7 @@ def main():
         unwm_green_rate, unwm_z_score = detect_watermark(
             unwatermarked_tokens, vocab_size, SECRET_KEY, gamma
         )
-        print(f"\n📊 Detection results:")
+        print("\n📊 Detection results:")
         print(f"   Green rate: {unwm_green_rate:.3f} (expected: {gamma:.3f})")
         print(f"   Z-score: {unwm_z_score:.2f}")
 
